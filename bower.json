@@ -1,7 +1,0 @@
-{
-  "name": "cchbobsbaglesclient",
-  "private": true,
-  "dependencies": {
-    "bootstrap": "~3.2.0"
-  }
-}
