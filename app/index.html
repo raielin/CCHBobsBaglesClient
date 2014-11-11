@@ -20,15 +20,19 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <ul class="nav nav-pills" role="tablist">
+    <ul class="nav nav-pills" role="tablist" id="navigation">
       <li role="presentation" class="active"><a href="#">Home</a></li>
       <li role="presentation"><a href="#/menu">Menu</a></li>
       <li role="presentation"><a href="#/about">About</a></li>
       <li role="presentation"><a href="#/contact">Contact</a></li>
-      <button type="button" class="btn btn-default btn-lg">
-         <span class="glyphicon glyphicon-shopping-cart" id="js-cart"></span> Cart
-      </button>
+      <li role="presentation">
+        <button type="button" class="btn btn-default btn-lg" id="js-cart-button">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Cart
+        </button>
+      </li>
     </ul>
+    <div id="js-cart" hidden></div>
+
 
     <script id="home-temp" type="text/x-handlebars-template">
         <h1>Home</h1>
@@ -36,9 +40,11 @@
 
     <script id="menu-temp" type="text/x-handlebars-template">
         <h1>Menu</h1>
-        {{#each order_items}}
-            <div><a class="order-item" href="#">{{ name }}</a></div>
-        {{/each}}
+        <ul>
+            {{#each order_items}}
+                <li><a class="order-item" href="#">{{ name }}</a></li>
+            {{/each}}
+        </ul>
     </script>
 
     <script id="about-temp" type="text/x-handlebars-template">
@@ -52,7 +58,8 @@
     <div class="container">
         <div id="content"></div>
     </div>
-    
+
+    </div>    
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->

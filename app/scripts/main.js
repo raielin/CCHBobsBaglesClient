@@ -9,8 +9,7 @@ var Router = Backbone.Router.extend({
     'menu': 'menu',
     'about': 'about',
     'contact': 'contact',
-    'checkout': 'checkout',
-    'cart': 'cart'
+    'checkout': 'checkout'
   },
 
   home: function() {
@@ -44,16 +43,20 @@ var Router = Backbone.Router.extend({
 
   checkout: function() {
 
-  },
-
-  cart: function() {
-
   }
 
 });
 
 var router = new Router();
 
+$(function() {
+  $('#js-cart-button').on('click', function() {
+    $('#js-cart').toggle('slow');
+  });
+
+  $('.order_item').on('click')
+
+});
 // Stripe.setPublishableKey('pk_test_0fbtu0To5Q8TurGcFy6XZ505');
 
 // function stripeResponseHandler(status, response) {
