@@ -13,7 +13,6 @@ function stripeResponseHandler(status, response) {
     // response contains id and card, which contains additional card details
     var token = response.id;
     var fullName = response.card.name;
-    debugger;
     // Insert the token into the form so it gets submitted to the server
     $form.append($('<input type="hidden" name="user[access_token]" />').val(token));
     $form.append($('<input type="hidden" name="user[name]" />').val(fullName));
