@@ -9,7 +9,8 @@ var Router = Backbone.Router.extend({
     'menu': 'menu',
     'about': 'about',
     'contact': 'contact',
-    'checkout': 'checkout'
+    'checkout': 'checkout',
+    'cart': 'cart'
   },
 
   home: function() {
@@ -20,13 +21,15 @@ var Router = Backbone.Router.extend({
   menu: function() {
     var template = Handlebars.compile($("#menu-temp").html());
     $.ajax({
-      url: 'http://localhost:3000/order_items',
+      url: 'http://localhost:3000/menus',
       type: 'GET'
     }).done(function(response) {
+      console.log(response);
       $('#content').html(template({
-        order_items: response.order_items
+        menu: response.menus
       }));
     });
+
   },
 
   about: function() {
@@ -42,21 +45,29 @@ var Router = Backbone.Router.extend({
   },
 
   checkout: function() {
+    var template = Handlebars.compile($("#checkout-temp").html());
+    $('#content').html(template({}));
+  },
 
+  cart: function() {
+    var template = Handlebars.compile($("#cart-temp").html());
+    $.ajax({
+      url: 'http://localhost:3000/order_items',
+      type: 'GET'
+    }).done(function(response) {
+      $('#content').html(template({
+        order_items: response.order_items
+      }));
+    });
+    
+    $('#place-order').on('click', function() {
+      Router.checkout();
+    });
   }
 
 });
 
 var router = new Router();
-
-$(function() {
-  $('#js-cart-button').on('click', function() {
-    $('#js-cart').toggle('slow');
-  });
-
-  $('.order_item').on('click')
-
-});
 // Stripe.setPublishableKey('pk_test_0fbtu0To5Q8TurGcFy6XZ505');
 
 // function stripeResponseHandler(status, response) {

@@ -21,17 +21,16 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <ul class="nav nav-pills" role="tablist" id="navigation">
-      <li role="presentation" class="active"><a href="#">Home</a></li>
+      <li role="presentation"><a href="#">Home</a></li>
       <li role="presentation"><a href="#/menu">Menu</a></li>
       <li role="presentation"><a href="#/about">About</a></li>
       <li role="presentation"><a href="#/contact">Contact</a></li>
       <li role="presentation">
         <button type="button" class="btn btn-default btn-lg" id="js-cart-button">
-            <span class="glyphicon glyphicon-shopping-cart"></span> Cart
+            <a href="#/cart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
         </button>
       </li>
     </ul>
-    <div id="js-cart" hidden></div>
 
 
     <script id="home-temp" type="text/x-handlebars-template">
@@ -40,11 +39,27 @@
 
     <script id="menu-temp" type="text/x-handlebars-template">
         <h1>Menu</h1>
-        <ul>
-            {{#each order_items}}
-                <li><a class="order-item" href="#">{{ name }}</a></li>
-            {{/each}}
+        <ul id="menu-list">
+          {{#each menu}}
+            <li><a class="menu-type">{{ name }}</a>
+                <ul id="menu-list">
+                  {{#menu_items}}  
+                    <li><a class="menu-item">{{ name }}</a></li> 
+                  {{/menu_items}}
+                </ul>
+            </li>  
+          {{/each}}
         </ul>
+    </script>
+
+    <script id="cart-temp" type="text/x-handlebars-template">
+        <h1>Cart</h1>
+          <ul>
+            {{#each order_items}}
+                <li><a class="order-item">{{ name }}</a></li>
+            {{/each}}
+          </ul>
+          <a href="#/checkout"><input id="place-order" type="submit" value="Place Order"/></a>
     </script>
 
     <script id="about-temp" type="text/x-handlebars-template">
@@ -53,6 +68,10 @@
 
     <script id="contact-temp" type="text/x-handlebars-template">
         <h1>Contact</h1>
+    </script>
+
+     <script id="checkout-temp" type="text/x-handlebars-template">
+        <h1>Checkout</h1>
     </script>
 
     <div class="container">
@@ -64,6 +83,7 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="bower_components/handlebars/handlebars.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
