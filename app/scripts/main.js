@@ -51,7 +51,7 @@ var router = new Router();
 
 $(function() {
   $('#js-cart-button').on('click', function() {
-    $('#js-cart').toggle('slow');
+    $('#js-cart').stop(true, true).toggle("blind", 1500);
   });
 
   $('.order_item').on('click')

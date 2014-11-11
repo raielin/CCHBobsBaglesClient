@@ -31,7 +31,6 @@
         </button>
       </li>
     </ul>
-    <div id="js-cart" hidden></div>
 
 
     <script id="home-temp" type="text/x-handlebars-template">
@@ -40,11 +39,13 @@
 
     <script id="menu-temp" type="text/x-handlebars-template">
         <h1>Menu</h1>
-        <ul>
-            {{#each order_items}}
-                <li><a class="order-item" href="#">{{ name }}</a></li>
-            {{/each}}
-        </ul>
+        <div id="js-cart" hidden>
+            <ul>
+                {{#each order_items}}
+                    <li><a class="order-item" href="#">{{ name }}</a></li>
+                {{/each}}
+            </ul>
+        </div>
     </script>
 
     <script id="about-temp" type="text/x-handlebars-template">
@@ -64,6 +65,7 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="bower_components/handlebars/handlebars.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
