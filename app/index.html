@@ -25,13 +25,28 @@
       <li role="presentation"><a href="#/menu">Menu</a></li>
       <li role="presentation"><a href="#/about">About</a></li>
       <li role="presentation"><a href="#/contact">Contact</a></li>
+      <button type="button" class="btn btn-default btn-lg">
+         <span class="glyphicon glyphicon-shopping-cart" id="js-cart"></span> Cart
+      </button>
     </ul>
+
+    <script id="home-temp" type="text/x-handlebars-template">
+        <h1>Home</h1>
+    </script>
 
     <script id="menu-temp" type="text/x-handlebars-template">
         <h1>Menu</h1>
         {{#each order_items}}
             <div><a class="order-item" href="#">{{ name }}</a></div>
         {{/each}}
+    </script>
+
+    <script id="about-temp" type="text/x-handlebars-template">
+        <h1>About</h1>
+    </script>
+
+    <script id="contact-temp" type="text/x-handlebars-template">
+        <h1>Contact</h1>
     </script>
 
     <div class="container">
@@ -75,7 +90,7 @@
         <script src="bower_components/underscore/underscore.js"></script>
         <script src="bower_components/backbone/backbone.js"></script>
         <script src="bower_components/handlebars/handlebars.runtime.js"></script>
-        <script src="templates/templates.js"></script>
+
         <!-- endbuild -->
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
         <!-- build:js({app,.tmp}) scripts/main.js -->

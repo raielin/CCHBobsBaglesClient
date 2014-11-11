@@ -9,12 +9,13 @@ var Router = Backbone.Router.extend({
     'menu': 'menu',
     'about': 'about',
     'contact': 'contact',
-    'checkout': 'checkout'
+    'checkout': 'checkout',
+    'cart': 'cart'
   },
 
   home: function() {
-    var template = Handlebars.templates.home;
-
+    var template = Handlebars.compile($("#home-temp").html());
+    $('#content').html(template({}));
   },
 
   menu: function() {
@@ -30,15 +31,23 @@ var Router = Backbone.Router.extend({
   },
 
   about: function() {
-    var template = Handlebars.templates.about;
+    var template = Handlebars.compile($("#about-temp").html());
+    $('#content').html(template({}));
+
   },
 
   contact: function() {
-    var template = Handlebars.templates.contact;
+    var template = Handlebars.compile($("#contact-temp").html());
+    $('#content').html(template({}));
+
   },
 
   checkout: function() {
-    var template = Handlebars.templates.checkout;
+
+  },
+
+  cart: function() {
+
   }
 
 });
