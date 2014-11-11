@@ -1,5 +1,7 @@
 'use strict';
 
+// Handlebars.registerPartial('cart', Handlebars.templates.cart);
+
 var Router = Backbone.Router.extend({
   routes: {
     '': 'home',
@@ -16,7 +18,13 @@ var Router = Backbone.Router.extend({
   },
 
   menu: function() {
-    var template = Handlebars.templates.menu;
+    var template = Handlebars.compile($("#menu-temp").html());
+    
+    
+    $('#content').html(template({
+
+    }));
+
   },
 
   about: function() {
@@ -32,6 +40,8 @@ var Router = Backbone.Router.extend({
   }
 
 });
+
+var router = new Router();
 
 // Stripe.setPublishableKey('pk_test_0fbtu0To5Q8TurGcFy6XZ505');
 
@@ -67,3 +77,5 @@ var Router = Backbone.Router.extend({
 //     return false;
 //   });
 // });
+
+Backbone.history.start();
