@@ -21,13 +21,13 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <ul class="nav nav-pills" role="tablist" id="navigation">
-      <li role="presentation" class="active"><a href="#">Home</a></li>
+      <li role="presentation"><a href="#">Home</a></li>
       <li role="presentation"><a href="#/menu">Menu</a></li>
       <li role="presentation"><a href="#/about">About</a></li>
       <li role="presentation"><a href="#/contact">Contact</a></li>
       <li role="presentation">
         <button type="button" class="btn btn-default btn-lg" id="js-cart-button">
-            <span class="glyphicon glyphicon-shopping-cart"></span> Cart
+            <span class="glyphicon glyphicon-shopping-cart"></span><a href="#/cart"></a></li>
         </button>
       </li>
     </ul>
@@ -49,15 +49,15 @@
             </li>  
           {{/each}}
         </ul>
+    </script>
 
-        <div id="js-cart" hidden>
-          <p><strong>Cart</strong></p>
+    <script id="cart-temp" type="text/x-handlebars-template">
+        <h1>Cart</h1>
           <ul>
             {{#each order_items}}
-                <li><a class="order-item" href="#">{{ name }}</a></li>
+                <li><a class="order-item">{{ name }}</a></li>
             {{/each}}
           </ul>
-        </div>
     </script>
 
     <script id="about-temp" type="text/x-handlebars-template">

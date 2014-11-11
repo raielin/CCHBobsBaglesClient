@@ -9,7 +9,8 @@ var Router = Backbone.Router.extend({
     'menu': 'menu',
     'about': 'about',
     'contact': 'contact',
-    'checkout': 'checkout'
+    'checkout': 'checkout',
+    'cart': 'cart'
   },
 
   home: function() {
@@ -29,14 +30,6 @@ var Router = Backbone.Router.extend({
       }));
     });
 
-    // $.ajax({
-    //   url: 'http://localhost:3000/order_items',
-    //   type: 'GET'
-    // }).done(function(response) {
-    //   $('#content').html(template({
-    //     order_items: response.order_items
-    //   }));
-    // });
   },
 
   about: function() {
@@ -53,18 +46,23 @@ var Router = Backbone.Router.extend({
 
   checkout: function() {
 
+  },
+
+  cart: function() {
+    var template = Handlebars.compile($("#cart-temp").html());
+    $.ajax({
+      url: 'http://localhost:3000/order_items',
+      type: 'GET'
+    }).done(function(response) {
+      $('#content').html(template({
+        order_items: response.order_items
+      }));
+    });
   }
 
 });
 
 var router = new Router();
-
-$(function() {
-  $('#js-cart-button').on('click', function() {
-    $('#js-cart').stop(true, true).toggle("blind", 1500);
-  });
-
-});
 // Stripe.setPublishableKey('pk_test_0fbtu0To5Q8TurGcFy6XZ505');
 
 // function stripeResponseHandler(status, response) {
