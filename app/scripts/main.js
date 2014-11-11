@@ -20,16 +20,23 @@ var Router = Backbone.Router.extend({
   menu: function() {
     var template = Handlebars.compile($("#menu-temp").html());
     $.ajax({
-      url: 'http://localhost:3000/order_items',
+      url: 'http://localhost:3000/menus',
       type: 'GET'
     }).done(function(response) {
+      console.log(response);
       $('#content').html(template({
-        order_items: response.order_items,
-        menu_items: [{
-          name: "best bagel"
-        }]
+        menu: response.menus
       }));
     });
+
+    // $.ajax({
+    //   url: 'http://localhost:3000/order_items',
+    //   type: 'GET'
+    // }).done(function(response) {
+    //   $('#content').html(template({
+    //     order_items: response.order_items
+    //   }));
+    // });
   },
 
   about: function() {

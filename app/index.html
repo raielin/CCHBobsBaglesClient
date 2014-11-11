@@ -38,9 +38,15 @@
     </script>
     <script id="menu-temp" type="text/x-handlebars-template">
         <h1>Menu</h1>
-        <ul id="list-item">
-          {{#each menu_items}}
-              <li><a class="menu-item" href="#">{{ name }}</a></li>
+        <ul id="menu-list">
+          {{#each menu}}
+            <li><a class="menu-type">{{ name }}</a>
+                <ul id="menu-list">
+                  {{#menu_items}}  
+                    <li><a class="menu-item">{{ name }}</a></li> 
+                  {{/menu_items}}
+                </ul>
+            </li>  
           {{/each}}
         </ul>
 

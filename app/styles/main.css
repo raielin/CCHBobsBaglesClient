@@ -26,6 +26,6 @@ div#js-cart ul, ul#list-item {
   list-style: none;
 }
 
-a.order-item, a.menu-item {
+a.order-item, a.menu-list {
   text-decoration: none;
 }
