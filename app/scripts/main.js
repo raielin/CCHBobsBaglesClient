@@ -45,7 +45,8 @@ var Router = Backbone.Router.extend({
   },
 
   checkout: function() {
-
+    var template = Handlebars.compile($("#checkout-temp").html());
+    $('#content').html(template({}));
   },
 
   cart: function() {
@@ -57,6 +58,10 @@ var Router = Backbone.Router.extend({
       $('#content').html(template({
         order_items: response.order_items
       }));
+    });
+    
+    $('#place-order').on('click', function() {
+      Router.checkout();
     });
   }
 

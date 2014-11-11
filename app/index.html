@@ -27,7 +27,7 @@
       <li role="presentation"><a href="#/contact">Contact</a></li>
       <li role="presentation">
         <button type="button" class="btn btn-default btn-lg" id="js-cart-button">
-            <span class="glyphicon glyphicon-shopping-cart"></span><a href="#/cart"></a></li>
+            <a href="#/cart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
         </button>
       </li>
     </ul>
@@ -36,6 +36,7 @@
     <script id="home-temp" type="text/x-handlebars-template">
         <h1>Home</h1>
     </script>
+
     <script id="menu-temp" type="text/x-handlebars-template">
         <h1>Menu</h1>
         <ul id="menu-list">
@@ -58,6 +59,7 @@
                 <li><a class="order-item">{{ name }}</a></li>
             {{/each}}
           </ul>
+          <a href="#/checkout"><input id="place-order" type="submit" value="Place Order"/></a>
     </script>
 
     <script id="about-temp" type="text/x-handlebars-template">
@@ -66,6 +68,10 @@
 
     <script id="contact-temp" type="text/x-handlebars-template">
         <h1>Contact</h1>
+    </script>
+
+     <script id="checkout-temp" type="text/x-handlebars-template">
+        <h1>Checkout</h1>
     </script>
 
     <div class="container">
