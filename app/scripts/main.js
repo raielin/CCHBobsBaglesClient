@@ -10,7 +10,27 @@ var Router = Backbone.Router.extend({
     'checkout': 'checkout'
   },
 
-  
+  home: function() {
+    var template = Handlebars.templates.home;
+
+  },
+
+  menu: function() {
+    var template = Handlebars.templates.menu;
+  },
+
+  about: function() {
+    var template = Handlebars.templates.about;
+  },
+
+  contact: function() {
+    var template = Handlebars.templates.contact;
+  },
+
+  checkout: function() {
+    var template = Handlebars.templates.checkout;
+  }
+
 });
 
 // Stripe.setPublishableKey('pk_test_0fbtu0To5Q8TurGcFy6XZ505');
