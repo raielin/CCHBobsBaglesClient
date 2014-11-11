@@ -7,6 +7,12 @@ body {
   padding: 0px;
 }
 
+div.container {
+  padding: 30px;
+}
+
+/*Cart styles*/
+
 div#js-cart {
   float: right;
   width: 200px;
@@ -16,14 +22,10 @@ div#js-cart {
 }
 
 
-div#js-cart ul {
+div#js-cart ul, ul#list-item {
   list-style: none;
 }
 
-div.container {
-  padding: 30px;
-}
-
-a.order-item {
+a.order-item, a.menu-item {
   text-decoration: none;
 }

@@ -36,15 +36,21 @@
     <script id="home-temp" type="text/x-handlebars-template">
         <h1>Home</h1>
     </script>
-
     <script id="menu-temp" type="text/x-handlebars-template">
         <h1>Menu</h1>
+        <ul id="list-item">
+          {{#each menu_items}}
+              <li><a class="menu-item" href="#">{{ name }}</a></li>
+          {{/each}}
+        </ul>
+
         <div id="js-cart" hidden>
-            <ul>
-                {{#each order_items}}
-                    <li><a class="order-item" href="#">{{ name }}</a></li>
-                {{/each}}
-            </ul>
+          <p><strong>Cart</strong></p>
+          <ul>
+            {{#each order_items}}
+                <li><a class="order-item" href="#">{{ name }}</a></li>
+            {{/each}}
+          </ul>
         </div>
     </script>
 

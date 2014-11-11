@@ -24,7 +24,10 @@ var Router = Backbone.Router.extend({
       type: 'GET'
     }).done(function(response) {
       $('#content').html(template({
-        order_items: response.order_items
+        order_items: response.order_items,
+        menu_items: [{
+          name: "best bagel"
+        }]
       }));
     });
   },
@@ -53,8 +56,6 @@ $(function() {
   $('#js-cart-button').on('click', function() {
     $('#js-cart').stop(true, true).toggle("blind", 1500);
   });
-
-  $('.order_item').on('click')
 
 });
 // Stripe.setPublishableKey('pk_test_0fbtu0To5Q8TurGcFy6XZ505');
