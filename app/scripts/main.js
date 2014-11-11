@@ -19,12 +19,14 @@ var Router = Backbone.Router.extend({
 
   menu: function() {
     var template = Handlebars.compile($("#menu-temp").html());
-    
-    
-    $('#content').html(template({
-
-    }));
-
+    $.ajax({
+      url: 'http://localhost:3000/order_items',
+      type: 'GET'
+    }).done(function(response) {
+      $('#content').html(template({
+        order_items: response.order_items
+      }));
+    });
   },
 
   about: function() {

@@ -1,5 +1,8 @@
 <script id="menu-temp" type="text/x-handlebars-template">
   <h1>Menu</h1>
+  {{#each order_items}}
+    <div><a class="order-item" href="#">{{ name }}</a></div>
+  {{/each}}
 </script>
 
 {{!-- {{> cart }} --}}
