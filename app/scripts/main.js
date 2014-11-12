@@ -5,16 +5,30 @@ var CCHBBClient = {
   jsonAppend: '.json',
   baseURL: 'http://localhost:3000/',
 
-  cart: {},
+  cart: {
+    orders: [{
+      name: 'bagel'
+    }]
+  },
+
   menu: {}
 };
 
-// $(document).ready(function() {
-//    $('#list li').on('click', function() {
-//       var name = $(this).val() 
-//       document.cookie = "name=" + name;
-//     });
-// });
+// event listeners
+CCHBBClient.addEvents = function() {
+
+    // $('#js-placeOrder').on('submit', CCHBBClient.checkOut);
+
+    // $('.js-taskForm').on('submit', CCHBBClient.submitTaskForm);
+
+    // $('.js-taskList').on('click', 'a', CCHBBClient.clickTaskItem);
+
+    // $('.js-removeCompleted').on('click', CCHBBClient.clickRemoveCompleted);
+};
+
+CCHBBClient.renderCart = function() {
+
+};
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -34,16 +48,20 @@ var Router = Backbone.Router.extend({
 
   menu: function() {
     var template = Handlebars.compile($("#menu-temp").html());
-    $('#content').html(template({
-      menu: CCHBBClient.menu
-    }));
-
+    $.ajax({
+      url: CCHBBClient.baseURL + 'menus' + CCHBBClient.jsonAppend,
+      type: 'GET',
+      dataType: 'json'
+    }).done(function(response) {
+      $('#content').html(template({
+        menu: response.menus
+      }));
+    });
   },
 
   about: function() {
     var template = Handlebars.compile($("#about-temp").html());
     $('#content').html(template({}));
-
   },
 
   contact: function() {
@@ -77,6 +95,7 @@ var Router = Backbone.Router.extend({
         $form.append($('<input type="hidden" name="user[name]" />').val(fullName));
         $form.append($('<input type="hidden" name="order[street]" />').val(street));
         $form.append($('<input type="hidden" name="order[city]" />').val(city));
+        $form.append($('<input type="hidden" name="order[state]" />').val(state));
         $form.append($('<input type="hidden" name="order[zip]" />').val(zip));
         // and submit
         $form.get(0).submit();
@@ -86,66 +105,25 @@ var Router = Backbone.Router.extend({
 
   cart: function() {
     var template = Handlebars.compile($("#cart-temp").html());
-    $.ajax({
-      url: CCHBBClient.baseURL + 'order_items' + CCHBBClient.jsonAppend,
-      type: 'GET'
-    }).done(function(response) {
-      $('#content').html(template({
-        order_items: response.order_items
+    debugger
+     $('#content').html(template({
+        order_items: CCHBBClient.cart.orders
       }));
-    });
-    
-    $('#place-order').on('click', function() {
-      Router.checkout();
-    });
+
   }
 
 });
 
-var router = new Router();
-Backbone.history.start();
-
-CCHBBClient.initCart = function() {
-  CCHBBClient.cart = {};
-};
-
-
-CCHBBClient.initMenu = function() {
-  CCHBBClient.menu = {};
-   $.ajax({
-      url: CCHBBClient.baseURL + 'menus' + CCHBBClient.jsonAppend,
-      type: 'GET'
-    }).done(function(response) {
-      CCHBBClient.menu = response.menus;
-    });
-};
-
-
-
-CCHBBClient.initApp = function() {
-  CCHBBClient.initCart;
-  CCHBBClient.initMenu;
-};
-
-// event listeners
-CCHBBClient.addEvents = function() {
-
-    // $('#js-placeOrder').on('submit', CCHBBClient.checkOut);
-
-    // $('.js-taskForm').on('submit', CCHBBClient.submitTaskForm);
-
-    // $('.js-taskList').on('click', 'a', CCHBBClient.clickTaskItem);
-
-    // $('.js-removeCompleted').on('click', CCHBBClient.clickRemoveCompleted);
-};
-
 // DOM ready
 $(function() {
-  CCHBBClient.initApp;
-  CCHBBClient.addEvents;
-  $.ajaxSetup({
-       contentType: 'application/json'
-  });
+
+  // $.ajaxSetup({contentType: 'application/json'});
+  // CCHBBClient.initApp();
+  CCHBBClient.addEvents();
+
+  var router = new Router();
+  Backbone.history.start();
+  
   $('#payment-form').submit(function(event) {
     var $form = $(this);
 
