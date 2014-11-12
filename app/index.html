@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>CCHBobsBaglesClient</title>
+    <title>Bob's Bagels</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
@@ -25,7 +25,7 @@
     <div id="navigation">
       <ul>
         <li><a href="#">Bob's Bagels</a></li>
-        <li role="presentation"><a href="#/home">Home</a></li>
+        <li role="presentation"><a href="#">Home</a></li>
         <li role="presentation"><a href="#/menu">Menu</a></li>
         <li role="presentation"><a href="#/about">About</a></li>
         <li role="presentation"><a href="#/contact">Contact</a></li>
@@ -33,10 +33,11 @@
       </ul>
     </div>
 
-
-    <script id="home-temp" type="text/x-handlebars-template">
+    <!--
+    <script id="home" type="text/x-handlebars-template">
         <h1>Home</h1>
     </script>
+    -->
 
     <script id="menu-temp" type="text/x-handlebars-template">
         <h1>Menu</h1>
@@ -44,11 +45,11 @@
           {{#each menu}}
             <li class="menu-type">{{ name }}
                 <ul id="list">
-                  {{#menu_items}}  
+                  {{#menu_items}}
                     <li class="menu-item">{{ name }}<span class="price">{{ price }}</span></li>
                   {{/menu_items}}
                 </ul>
-            </li>  
+            </li>
           {{/each}}
         </ul>
     </script>
@@ -80,13 +81,9 @@
         <div id="content"></div>
     </div>
 
-    </div>    
+    </div>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/handlebars/handlebars.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -116,13 +113,13 @@
 
         <script src="bower_components/underscore/underscore.js"></script>
         <script src="bower_components/backbone/backbone.js"></script>
-        <script src="bower_components/handlebars/handlebars.runtime.js"></script>
-
-
-        <!-- endbuild -->
+        <script src="bower_components/handlebars/handlebars.js"></script>
+        <script src="templates/templates.js"></script>
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
-        <!-- endbuild -->
+        <!-- INCLUDE WHEN READY FOR PRODUCTION
+        // <script src="bower_components/handlebars/handlebars.runtime.js"></script>
+        -->
 </body>
 </html>

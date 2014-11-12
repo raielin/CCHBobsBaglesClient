@@ -1,10 +1,10 @@
 'use strict';
-
+// handlebars templates/> templates/templates.js
 // Handlebars.registerPartial('cart', Handlebars.templates.cart);
 
 $(document).ready(function() {
    $('#list li').on('click', function() {
-      var name = $(this).val() 
+      var name = $(this).val()
       document.cookie = "name=" + name;
     });
 });
@@ -21,12 +21,15 @@ var Router = Backbone.Router.extend({
   },
 
   home: function() {
-    var template = Handlebars.compile($("#home-temp").html());
-    $('#content').html(template({}));
+    var template = Handlebars.templates['home'];
+
+    $('#content').html(template({
+        name: 'Bob'
+    }));
   },
 
   menu: function() {
-    var template = Handlebars.compile($("#menu-temp").html());
+    var template = Handlebars.compile($('#menu-temp').html());
 
     $.ajax({
       url: 'http://localhost:3000/menus',
@@ -67,7 +70,7 @@ var Router = Backbone.Router.extend({
         order_items: response.order_items
       }));
     });
-    
+
     $('#place-order').on('click', function() {
       Router.checkout();
     });
