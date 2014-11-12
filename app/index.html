@@ -51,6 +51,15 @@
             </li>  
           {{/each}}
         </ul>
+        <div id="js-cart">
+          <p><strong>Cart</strong></p>
+          <ul>
+            {{#each order_items}}
+                <li><a class="order-item">{{ name }}</a><span class="price">{{ price }}</span></li>
+            {{/each}}
+          </ul>
+          <a href="#/checkout"><input class="actions" type="submit" value="Place Order"/></a>
+        </div>
     </script>
 
     <script id="cart-temp" type="text/x-handlebars-template">

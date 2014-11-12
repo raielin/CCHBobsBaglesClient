@@ -16,7 +16,6 @@ var CCHBBClient = {
 };
 
 CCHBBClient.renderCart = function(name, price) {
-  debugger
   CCHBBClient.cart.orders.push({name: name, price: price});
 };
 
@@ -26,8 +25,8 @@ CCHBBClient.addEvents = function() {
     e.preventDefault();
     var name = $(this).html();
     var price = $(this).next().html();
-    debugger
     CCHBBClient.renderCart(name, price);
+    CCHBBClient.router.menu();
   });
     // $('#js-placeOrder').on('submit', CCHBBClient.checkOut);
 
@@ -62,9 +61,12 @@ var Router = Backbone.Router.extend({
       dataType: 'json'
     }).done(function(response) {
       $('#content').html(template({
-        menu: response.menus
+        menu: response.menus,
+        order_items: CCHBBClient.cart.orders
       }));
     });
+
+
   },
 
   about: function() {
@@ -125,7 +127,7 @@ $(function() {
 
   // $.ajaxSetup({contentType: 'application/json'});
   // CCHBBClient.initApp();
-  var router = new Router();
+  CCHBBClient.router = new Router();
   Backbone.history.start();
 
   CCHBBClient.addEvents();
