@@ -3,7 +3,7 @@
 var CCHBBClient = {
   // baseURL: 'https://cch-bobsbagels-api.herokuapp.com/',
   jsonAppend: '.json',
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'https://cch-bobsbagels-api.herokuapp.com/',
 
   cart: {
     orders: []
@@ -93,7 +93,7 @@ var Router = Backbone.Router.extend({
 
     function stripeResponseHandler(status, response) {
       var $form = $('#payment-form');
-    
+
       if (response.error) {
         // Show the errors on the form
         $form.find('.payment-errors').text(response.error.message);
