@@ -9,8 +9,6 @@ var CCHBBClient = {
   menu: {}
 };
 
-// Handlebars.registerPartial('cart', Handlebars.templates.cart);
-
 // $(document).ready(function() {
 //    $('#list li').on('click', function() {
 //       var name = $(this).val() 
@@ -36,16 +34,9 @@ var Router = Backbone.Router.extend({
 
   menu: function() {
     var template = Handlebars.compile($("#menu-temp").html());
-
-    $.ajax({
-      url: CCHBBClient.baseURL + 'menus' + CCHBBClient.jsonAppend,
-      type: 'GET'
-    }).done(function(response) {
-
-      $('#content').html(template({
-        menu: response.menus
-      }));
-    });
+    $('#content').html(template({
+      menu: CCHBBClient.menu
+    }));
 
   },
 
@@ -77,9 +68,16 @@ var Router = Backbone.Router.extend({
         // response contains id and card, which contains additional card details
         var token = response.id;
         var fullName = response.card.name;
+        var street = response.card.address_line1;
+        var city = response.card.city;
+        var state = response.card.state;
+        var zip = response.card.zip;
         // Insert the token into the form so it gets submitted to the server
         $form.append($('<input type="hidden" name="user[access_token]" />').val(token));
         $form.append($('<input type="hidden" name="user[name]" />').val(fullName));
+        $form.append($('<input type="hidden" name="order[street]" />').val(street));
+        $form.append($('<input type="hidden" name="order[city]" />').val(city));
+        $form.append($('<input type="hidden" name="order[zip]" />').val(zip));
         // and submit
         $form.get(0).submit();
       }
@@ -107,18 +105,26 @@ var Router = Backbone.Router.extend({
 var router = new Router();
 Backbone.history.start();
 
-CCHBBClient.initCart = function () {
+CCHBBClient.initCart = function() {
   CCHBBClient.cart = {};
 };
 
 
 CCHBBClient.initMenu = function() {
   CCHBBClient.menu = {};
+   $.ajax({
+      url: CCHBBClient.baseURL + 'menus' + CCHBBClient.jsonAppend,
+      type: 'GET'
+    }).done(function(response) {
+      CCHBBClient.menu = response.menus;
+    });
 };
 
+
+
 CCHBBClient.initApp = function() {
-  CCHBBClient.initCart();
-  CCHBBClient.initMenu();
+  CCHBBClient.initCart;
+  CCHBBClient.initMenu;
 };
 
 // event listeners
@@ -135,8 +141,8 @@ CCHBBClient.addEvents = function() {
 
 // DOM ready
 $(function() {
-  CCHBBClient.addEvents();
-  CCHBBClient.initApp();
+  CCHBBClient.initApp;
+  CCHBBClient.addEvents;
   $.ajaxSetup({
        contentType: 'application/json'
   });
