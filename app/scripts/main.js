@@ -24,7 +24,7 @@ var Router = Backbone.Router.extend({
       url: 'http://localhost:3000/menus',
       type: 'GET'
     }).done(function(response) {
-      console.log(response);
+
       $('#content').html(template({
         menu: response.menus
       }));

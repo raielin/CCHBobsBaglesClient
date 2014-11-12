@@ -29,6 +29,12 @@ div#navigation ul li a {
   text-decoration: none;
 }
 
+/*Menu styles*/
+
+.price {
+  margin: 0px 15px;
+} 
+
 /*Cart styles*/
 
 div#js-cart {

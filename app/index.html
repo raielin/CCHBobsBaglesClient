@@ -43,7 +43,8 @@
             <li><a class="menu-type">{{ name }}</a>
                 <ul id="menu-list">
                   {{#menu_items}}  
-                    <li><a class="menu-item">{{ name }}</a></li> 
+                    <li><a class="menu-item">{{ name }}</a><span class="price">{{ price }}</span></li>
+                    <input type="submit" value="Add" hidden/> 
                   {{/menu_items}}
                 </ul>
             </li>  
