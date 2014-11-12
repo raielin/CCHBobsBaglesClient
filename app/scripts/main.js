@@ -107,7 +107,39 @@ var Router = Backbone.Router.extend({
 var router = new Router();
 Backbone.history.start();
 
-$(document).ready(function() {
+CCHBBClient.initCart = function () {
+  CCHBBClient.cart = {};
+};
+
+
+CCHBBClient.initMenu = function() {
+  CCHBBClient.menu = {};
+};
+
+CCHBBClient.initApp = function() {
+  CCHBBClient.initCart();
+  CCHBBClient.initMenu();
+};
+
+// event listeners
+CCHBBClient.addEvents = function() {
+
+    // $('#js-placeOrder').on('submit', CCHBBClient.checkOut);
+
+    // $('.js-taskForm').on('submit', CCHBBClient.submitTaskForm);
+
+    // $('.js-taskList').on('click', 'a', CCHBBClient.clickTaskItem);
+
+    // $('.js-removeCompleted').on('click', CCHBBClient.clickRemoveCompleted);
+};
+
+// DOM ready
+$(function() {
+  CCHBBClient.addEvents();
+  CCHBBClient.initApp();
+  $.ajaxSetup({
+       contentType: 'application/json'
+  });
   $('#payment-form').submit(function(event) {
     var $form = $(this);
 
