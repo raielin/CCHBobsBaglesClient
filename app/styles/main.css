@@ -11,6 +11,38 @@ div.container {
   padding: 30px;
 }
 
+/*header*/
+div#navigation {
+  background-color: #5C9EBF;
+  height: 40px;
+}
+
+div#navigation ul li {
+  list-style: none;
+  display: inline-block;
+  margin: 10px 3%;
+
+}
+
+div#navigation ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+/*Menu styles*/
+
+.price {
+  margin: 0px 15px;
+} 
+
+#menu-list li.menu-type {
+  list-style: none;
+}
+
+li.menu-item:hover {
+  cursor: pointer;
+}
+
 /*Cart styles*/
 
 div#js-cart {
@@ -28,4 +60,21 @@ div#js-cart ul, ul#list-item {
 
 a.order-item, a.menu-list {
   text-decoration: none;
+}
+
+/*buttons*/
+
+.actions {
+  border: 1px solid #5C9EBF;
+  background-color: #5C9EBF;
+  color: white;
+  text-decoration: none;
+  padding: 3px 5px;
+  border-radius: 2px;
+}
+
+.actions:hover {
+  border: 1px solid #A00000;
+  background-color: #A00000;
+  cursor: pointer;
 }

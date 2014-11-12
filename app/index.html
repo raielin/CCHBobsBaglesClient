@@ -15,22 +15,23 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   </head>
   <body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <ul class="nav nav-pills" role="tablist" id="navigation">
-      <li role="presentation"><a href="#">Home</a></li>
-      <li role="presentation"><a href="#/menu">Menu</a></li>
-      <li role="presentation"><a href="#/about">About</a></li>
-      <li role="presentation"><a href="#/contact">Contact</a></li>
-      <li role="presentation">
-        <button type="button" class="btn btn-default btn-lg" id="js-cart-button">
-            <a href="#/cart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-        </button>
-      </li>
-    </ul>
+    <div id="navigation">
+      <ul>
+        <li><a href="#">Bob's Bagels</a></li>
+        <li role="presentation"><a href="#/home">Home</a></li>
+        <li role="presentation"><a href="#/menu">Menu</a></li>
+        <li role="presentation"><a href="#/about">About</a></li>
+        <li role="presentation"><a href="#/contact">Contact</a></li>
+        <li role="presentation"><a href="#/cart">Cart</a></li>
+      </ul>
+    </div>
 
 
     <script id="home-temp" type="text/x-handlebars-template">
@@ -41,10 +42,10 @@
         <h1>Menu</h1>
         <ul id="menu-list">
           {{#each menu}}
-            <li><a class="menu-type">{{ name }}</a>
-                <ul id="menu-list">
+            <li class="menu-type">{{ name }}
+                <ul id="list">
                   {{#menu_items}}  
-                    <li><a class="menu-item">{{ name }}</a></li> 
+                    <li class="menu-item">{{ name }}<span class="price">{{ price }}</span></li>
                   {{/menu_items}}
                 </ul>
             </li>  
@@ -59,11 +60,12 @@
                 <li><a class="order-item">{{ name }}</a></li>
             {{/each}}
           </ul>
-          <a href="#/checkout"><input id="place-order" type="submit" value="Place Order"/></a>
+          <a href="#/checkout"><input class="actions" type="submit" value="Place Order"/></a>
     </script>
 
     <script id="about-temp" type="text/x-handlebars-template">
         <h1>About</h1>
+        <p>Robert Bob Bagler was born in Boston in 1951; after years of working in his father`s restaurant, Arthur`s, he struck out on his own in 1979 and started Bob`s Bagels right where it sits today, at XYZ Ave in Boston. For the last forty years, Bob`s Bagels has strived to proved the best bagels in town, at the best prices, made with love from only the freshest ingredients. Bob still works the counter, just like the old days, so stop in sometime and say hello!</p>
     </script>
 
     <script id="contact-temp" type="text/x-handlebars-template">
@@ -145,8 +147,6 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="bower_components/handlebars/handlebars.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
@@ -180,6 +180,7 @@
         <script src="bower_components/underscore/underscore.js"></script>
         <script src="bower_components/backbone/backbone.js"></script>
         <script src="bower_components/handlebars/handlebars.runtime.js"></script>
+
 
         <!-- endbuild -->
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
