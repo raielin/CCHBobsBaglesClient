@@ -6,10 +6,7 @@ var CCHBBClient = {
   baseURL: 'http://localhost:3000/',
 
   cart: {
-    orders: [{
-      name: 'bagel',
-      price: '6.25'
-    }]
+    orders: []
   },
 
   menu: {}
@@ -82,7 +79,16 @@ var Router = Backbone.Router.extend({
 
   checkout: function() {
     var template = Handlebars.compile($("#checkout-temp").html());
-    $('#content').html(template({}));
+    var total = 0;
+    for(var i = 0, length = CCHBBClient.cart.orders.length; i < length; i++) {
+      total += parseFloat(CCHBBClient.cart.orders[i].price);
+    };
+
+    $('#content').html(template({
+      order_items: CCHBBClient.cart.orders,
+      total_price: total
+    }));
+
     Stripe.setPublishableKey('pk_test_0fbtu0To5Q8TurGcFy6XZ505');
 
     function stripeResponseHandler(status, response) {
@@ -119,7 +125,6 @@ var Router = Backbone.Router.extend({
         order_items: CCHBBClient.cart.orders
       }));
   }
-
 });
 
 // DOM ready

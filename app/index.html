@@ -82,6 +82,13 @@
     </script>
 
      <script id="checkout-temp" type="text/x-handlebars-template">
+     <h1>Order Summary</h1>
+        <ul>
+          {{#each order_items}}
+             <li><a class="order-item">{{ name }}</a><span class="price">{{ price }}</span></li>
+          {{/each}}
+          <div><strong>Subtotal:</strong> ${{ total_price }}</div>
+        </ul>   
         <h1>Checkout</h1>
         <form action="http://localhost:3000/users" method="POST" id="payment-form">
           <span class="payment-errors"></span>
