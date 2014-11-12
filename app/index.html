@@ -20,17 +20,16 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <ul class="nav nav-pills" role="tablist" id="navigation">
-      <li role="presentation"><a href="#">Home</a></li>
-      <li role="presentation"><a href="#/menu">Menu</a></li>
-      <li role="presentation"><a href="#/about">About</a></li>
-      <li role="presentation"><a href="#/contact">Contact</a></li>
-      <li role="presentation">
-        <button type="button" class="btn btn-default btn-lg" id="js-cart-button">
-            <a href="#/cart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-        </button>
-      </li>
-    </ul>
+    <div id="navigation">
+      <ul>
+        <li role="presentation"><a href="#">Bob's Bagels</a></li>
+        <li role="presentation"><a href="#/home">Home</a></li>
+        <li role="presentation"><a href="#/menu">Menu</a></li>
+        <li role="presentation"><a href="#/about">About</a></li>
+        <li role="presentation"><a href="#/contact">Contact</a></li>
+        <li role="presentation"><a href="#/cart">Cart</a></li>
+      </ul>
+    </div>
 
 
     <script id="home-temp" type="text/x-handlebars-template">
@@ -83,7 +82,6 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="bower_components/handlebars/handlebars.js"></script>
     <!-- endbower -->
     <!-- endbuild -->

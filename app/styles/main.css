@@ -11,6 +11,24 @@ div.container {
   padding: 30px;
 }
 
+/*header*/
+div#navigation {
+  background-color: #5C9EBF;
+  height: 40px;
+}
+
+div#navigation ul li {
+  list-style: none;
+  display: inline-block;
+  margin: 10px 3%;
+
+}
+
+div#navigation ul li a {
+  color: white;
+  text-decoration: none;
+}
+
 /*Cart styles*/
 
 div#js-cart {
