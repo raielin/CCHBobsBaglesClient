@@ -2,6 +2,13 @@
 
 // Handlebars.registerPartial('cart', Handlebars.templates.cart);
 
+$(document).ready(function() {
+   $('#list li').on('click', function() {
+      var name = $(this).val() 
+      document.cookie = "name=" + name;
+    });
+});
+
 var Router = Backbone.Router.extend({
   routes: {
     '': 'home',
@@ -20,6 +27,7 @@ var Router = Backbone.Router.extend({
 
   menu: function() {
     var template = Handlebars.compile($("#menu-temp").html());
+
     $.ajax({
       url: 'http://localhost:3000/menus',
       type: 'GET'
