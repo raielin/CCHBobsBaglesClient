@@ -45,7 +45,7 @@
             <li class="menu-type">{{ name }}
                 <ul id="list">
                   {{#menu_items}}  
-                    <li class="menu-item">{{ name }}<span class="price">{{ price }}</span></li>
+                    <li><a class="menu-item"  data-id="{{ id }}" href="#">{{ name }}</a><span class="price">{{ price }}</span></li>
                   {{/menu_items}}
                 </ul>
             </li>  
@@ -57,7 +57,7 @@
         <h1>Cart</h1>
           <ul>
             {{#each order_items}}
-                <li><a class="order-item">{{ name }}</a></li>
+                <li><a class="order-item">{{ name }}</a><span class="price">{{ price }}</span></li>
             {{/each}}
           </ul>
           <a href="#/checkout"><input class="actions" type="submit" value="Place Order"/></a>

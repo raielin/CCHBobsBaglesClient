@@ -7,16 +7,28 @@ var CCHBBClient = {
 
   cart: {
     orders: [{
-      name: 'bagel'
+      name: 'bagel',
+      price: '6.25'
     }]
   },
 
   menu: {}
 };
 
+CCHBBClient.renderCart = function(name, price) {
+  debugger
+  CCHBBClient.cart.orders.push({name: name, price: price});
+};
+
 // event listeners
 CCHBBClient.addEvents = function() {
-
+  $('#content').on('click', '.menu-item', function(e) {
+    e.preventDefault();
+    var name = $(this).html();
+    var price = $(this).next().html();
+    debugger
+    CCHBBClient.renderCart(name, price);
+  });
     // $('#js-placeOrder').on('submit', CCHBBClient.checkOut);
 
     // $('.js-taskForm').on('submit', CCHBBClient.submitTaskForm);
@@ -24,10 +36,6 @@ CCHBBClient.addEvents = function() {
     // $('.js-taskList').on('click', 'a', CCHBBClient.clickTaskItem);
 
     // $('.js-removeCompleted').on('click', CCHBBClient.clickRemoveCompleted);
-};
-
-CCHBBClient.renderCart = function() {
-
 };
 
 var Router = Backbone.Router.extend({
@@ -91,8 +99,8 @@ var Router = Backbone.Router.extend({
         var state = response.card.state;
         var zip = response.card.zip;
         // Insert the token into the form so it gets submitted to the server
-        $form.append($('<input type="hidden" name="user[access_token]" />').val(token));
-        $form.append($('<input type="hidden" name="user[name]" />').val(fullName));
+        $form.append($('<input type="hidden" name="order[access_token]" />').val(token));
+        $form.append($('<input type="hidden" name="order[name]" />').val(fullName));
         $form.append($('<input type="hidden" name="order[street]" />').val(street));
         $form.append($('<input type="hidden" name="order[city]" />').val(city));
         $form.append($('<input type="hidden" name="order[state]" />').val(state));
@@ -105,11 +113,9 @@ var Router = Backbone.Router.extend({
 
   cart: function() {
     var template = Handlebars.compile($("#cart-temp").html());
-    debugger
      $('#content').html(template({
         order_items: CCHBBClient.cart.orders
       }));
-
   }
 
 });
@@ -119,11 +125,11 @@ $(function() {
 
   // $.ajaxSetup({contentType: 'application/json'});
   // CCHBBClient.initApp();
-  CCHBBClient.addEvents();
-
   var router = new Router();
   Backbone.history.start();
-  
+
+  CCHBBClient.addEvents();
+
   $('#payment-form').submit(function(event) {
     var $form = $(this);
 
