@@ -1,13 +1,22 @@
 'use strict';
 
+var CCHBBClient = {
+  // baseURL: 'https://cch-bobsbagels-api.herokuapp.com/',
+  jsonAppend: '.json',
+  baseURL: 'http://localhost:3000/',
+
+  cart: {},
+  menu: {}
+};
+
 // Handlebars.registerPartial('cart', Handlebars.templates.cart);
 
-$(document).ready(function() {
-   $('#list li').on('click', function() {
-      var name = $(this).val() 
-      document.cookie = "name=" + name;
-    });
-});
+// $(document).ready(function() {
+//    $('#list li').on('click', function() {
+//       var name = $(this).val() 
+//       document.cookie = "name=" + name;
+//     });
+// });
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -29,7 +38,7 @@ var Router = Backbone.Router.extend({
     var template = Handlebars.compile($("#menu-temp").html());
 
     $.ajax({
-      url: 'http://localhost:3000/menus',
+      url: CCHBBClient.baseURL + 'menus' + CCHBBClient.jsonAppend,
       type: 'GET'
     }).done(function(response) {
 
@@ -55,12 +64,32 @@ var Router = Backbone.Router.extend({
   checkout: function() {
     var template = Handlebars.compile($("#checkout-temp").html());
     $('#content').html(template({}));
+    Stripe.setPublishableKey('pk_test_0fbtu0To5Q8TurGcFy6XZ505');
+
+    function stripeResponseHandler(status, response) {
+      var $form = $('#payment-form');
+    
+      if (response.error) {
+        // Show the errors on the form
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        // response contains id and card, which contains additional card details
+        var token = response.id;
+        var fullName = response.card.name;
+        // Insert the token into the form so it gets submitted to the server
+        $form.append($('<input type="hidden" name="user[access_token]" />').val(token));
+        $form.append($('<input type="hidden" name="user[name]" />').val(fullName));
+        // and submit
+        $form.get(0).submit();
+      }
+    }
   },
 
   cart: function() {
     var template = Handlebars.compile($("#cart-temp").html());
     $.ajax({
-      url: 'http://localhost:3000/order_items',
+      url: CCHBBClient.baseURL + 'order_items' + CCHBBClient.jsonAppend,
       type: 'GET'
     }).done(function(response) {
       $('#content').html(template({
@@ -76,39 +105,18 @@ var Router = Backbone.Router.extend({
 });
 
 var router = new Router();
-// Stripe.setPublishableKey('pk_test_0fbtu0To5Q8TurGcFy6XZ505');
-
-// function stripeResponseHandler(status, response) {
-//   var $form = $('#payment-form');
-
-//   if (response.error) {
-//     // Show the errors on the form
-//     $form.find('.payment-errors').text(response.error.message);
-//     $form.find('button').prop('disabled', false);
-//   } else {
-//     // response contains id and card, which contains additional card details
-//     var token = response.id;
-//     var fullName = response.card.name;
-//     // Insert the token into the form so it gets submitted to the server
-//     $form.append($('<input type="hidden" name="user[access_token]" />').val(token));
-//     $form.append($('<input type="hidden" name="user[name]" />').val(fullName));
-//     // and submit
-//     $form.get(0).submit();
-//   }
-// }
-
-// $(document).ready(function() {
-//   $('#payment-form').submit(function(event) {
-//     var $form = $(this);
-
-//     // Disable the submit button to prevent repeated clicks
-//     $form.find('button').prop('disabled', true);
-
-//     Stripe.card.createToken($form, stripeResponseHandler);
-
-//     // Prevent the form from submitting with the default action
-//     return false;
-//   });
-// });
-
 Backbone.history.start();
+
+$(document).ready(function() {
+  $('#payment-form').submit(function(event) {
+    var $form = $(this);
+
+    // Disable the submit button to prevent repeated clicks
+    $form.find('button').prop('disabled', true);
+
+    Stripe.card.createToken($form, stripeResponseHandler);
+
+    // Prevent the form from submitting with the default action
+    return false;
+  });
+});
